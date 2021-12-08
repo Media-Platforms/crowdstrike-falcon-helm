@@ -214,7 +214,7 @@ testing:
   enabled: false
 
 falcon:
-  cid: null
+  cid:
   aid:
   apd:
   aph:
