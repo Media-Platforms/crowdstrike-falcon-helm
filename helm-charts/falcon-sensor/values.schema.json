@@ -5,16 +5,8 @@
         "falcon": {
             "type": "object",
             "required": [
-                "cid"
             ],
             "properties": {
-                "cid": {
-                    "type": "string",
-                    "pattern": "^[0-9a-fA-F]{32}-[0-9a-fA-F]{2}$",
-                    "example": [
-                        "1234567890ABCDEF1234567890ABCDEF-12"
-                    ]
-                },
                 "trace": {
                     "type": [
                         "null",
@@ -371,5 +363,34 @@
         "fullnameOverride": {
             "type": "string"
         }
-    }
+    },
+    "oneOf": [
+        {
+            "properties": {
+                "falcon": {
+                    "type": "object",
+                    "required": [
+                        "cid"
+                    ],
+                    "properties": {
+                        "cid": {
+                            "type": "string",
+                            "pattern": "^[0-9a-fA-F]{32}-[0-9a-fA-F]{2}$",
+                            "example": [
+                                "1234567890ABCDEF1234567890ABCDEF-12"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "properties": {
+                "existingSecretName": {
+                    "type": "string",
+                    "description": "The name of an existing secret in which the FALCONCTL_OPT_CID key is set."
+                }
+            }
+        }
+    ]
 }
