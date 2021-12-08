@@ -230,4 +230,7 @@ falcon:
 # Only edit these if you know what you're doing
 nameOverride: ""
 fullnameOverride: ""
+
+# When set, uses an existing secret to inject environment variablesto the Falcon sensor.
+# If used, secret object must include key FALCONCTL_OPT_CID
 existingSecretName:

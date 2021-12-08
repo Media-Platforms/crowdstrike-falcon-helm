@@ -52,19 +52,24 @@ helm repo update
 
 The following tables lists the Falcon Sensor configurable parameters and their default values.
 
-| Parameter                   | Description                                               | Default               |
-|:----------------------------|:----------------------------------------------------------|:----------------------|
-| `falcon.cid`                | CrowdStrike Customer ID (CID)                             | None       (Required) |
-| `falcon.apd`                | App Proxy Disable (APD)                                   | None                  |
-| `falcon.aph`                | App Proxy Hostname (APH)                                  | None                  |
-| `falcon.app`                | App Proxy Port (APP)                                      | None                  |
-| `falcon.trace`              | Set trace level. (`none`,`err`,`warn`,`info`,`debug`)     | `none`                |
-| `falcon.feature`            | Sensor Feature options                                    | None                  |
-| `falcon.message_log`        | Enable message log (true/false)                           | None                  |
-| `falcon.billing`            | Utilize default or metered billing                        | None                  |
-| `falcon.tags`               | Comma separated list of tags for sensor grouping          | None                  |
-| `falcon.provisioning_token` | Provisioning token value                                  | None                  |
+| Parameter                   | Description                                               | Default |
+|:----------------------------|:----------------------------------------------------------|:--------|
+| `falcon.cid`                | CrowdStrike Customer ID (CID)                             | None    |
+| `falcon.apd`                | App Proxy Disable (APD)                                   | None    |
+| `falcon.aph`                | App Proxy Hostname (APH)                                  | None    |
+| `falcon.app`                | App Proxy Port (APP)                                      | None    |
+| `falcon.trace`              | Set trace level. (`none`,`err`,`warn`,`info`,`debug`)     | `none`  |
+| `falcon.feature`            | Sensor Feature options                                    | None    |
+| `falcon.message_log`        | Enable message log (true/false)                           | None    |
+| `falcon.billing`            | Utilize default or metered billing                        | None    |
+| `falcon.tags`               | Comma separated list of tags for sensor grouping          | None    |
+| `falcon.provisioning_token` | Provisioning token value                                  | None    |
 
+## Setting the Falcon Sensor CID
+
+You may configure the Falcon sensor's Customer ID by setting the `falcon.cid` value, or by creating your own Kubernetes secret object and referencing its name using the `existingSecretName` value. The secret object must contain the key `FALCONCTL_OPT_CID`.
+
+`falcon.cid` and `existingSecretName` are mutually exclusive.
 
 ## Installing on Kubernetes Cluster Nodes
 
@@ -127,9 +132,9 @@ The following tables lists the more common configurable parameters of the chart 
 | `node.image.pullPolicy`           | Policy for updating images                                             | `Always`                                                                |
 | `node.image.pullSecrets`          | Pull secrets for private registry                                      | None       (Conflicts with node.image.registryConfigJSON)               |
 | `node.image.registryConfigJSON`   | base64 encoded docker config json for the pull secret                  | None       (Conflicts with node.image.pullSecrets)                      |
-| `falcon.cid`                      | CrowdStrike Customer ID (CID)                                          | None       (Required)                                                   |
+| `falcon.cid`                      | CrowdStrike Customer ID (CID)                                          | None                                                                    |
 
-`falcon.cid` and `node.image.repository` are required values.
+`node.image.repository` is a required value.
 
 For a complete listing of configurable parameters, run the following command:
 
@@ -203,9 +208,9 @@ The following tables lists the more common configurable parameters of the chart 
 | `container.image.pullSecrets.allNamespaces`      | Use Helm's lookup function to deploy the pull secret to all namespaces. Helm chart must be re-run everytime a new namespace is created. | `false`  |
 | `container.image.pullSecrets.registryConfigJSON` | base64 encoded docker config json for the pull secret                       | None                         |
 | `container.image.sensorResources`                | The requests and limits of the sensor ([see example below](#example-using-containerimagesensorresources))                      | None                         |
-| `falcon.cid`                                     | CrowdStrike Customer ID (CID)                                               | None       (Required)        |
+| `falcon.cid`                                     | CrowdStrike Customer ID (CID)                                               | None                         |
 
-`falcon.cid` and `container.image.repository` are required values.
+`container.image.repository` is a required value.
 
 For a complete listing of configurable parameters, run the following command:
 
